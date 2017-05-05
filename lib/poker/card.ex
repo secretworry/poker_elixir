@@ -1,22 +1,19 @@
 defmodule Poker.Card do
   @type suit_t :: :diamonds | :clubs | :hearts | :spades
   @type rank_t :: 1..13
-  @type t :: %__MODULE__{suit: suit_t, rank: rank_t}
-
-  @enforce_keys ~w{suit rank}a
-  defstruct [:suit, :rank]
+  @type t :: {suit_t, rank_t}
 
   @suits [:diamonds, :clubs, :hearts, :spades]
   @ranks 1..13
   def new(suit, rank) when suit in @suits and rank in @ranks do
-    %__MODULE__{suit: suit, rank: rank}
+    {suit, rank}
   end
 
   def new(suit, rank) do
     raise ArgumentError, "Illegal args #{inspect suit}, #{inspect rank}"
   end
 
-  def to_string(%Poker.Card{suit: suit, rank: rank}) do
+  def to_string({suit, rank}) do
     suit_to_string(suit) <> rank_to_string(rank)
   end
 
@@ -36,9 +33,5 @@ defmodule Poker.Card do
   defp rank_to_string(13), do: "K"
   defp rank_to_string(num) when num >= 2 and num <= 10, do: Integer.to_string(num)
   defp rank_to_string(error_num), do: "error_#{inspect error_num}"
-
-  defimpl String.Chars do
-    def to_string(card), do: Poker.Card.to_string(card)
-  end
 
 end
