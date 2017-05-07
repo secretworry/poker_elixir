@@ -1,3 +1,2 @@
 defmodule Poker do
-
 end
