@@ -33,6 +33,10 @@ defmodule Poker.Card do
     Enum.sort_by(cards, &(elem(&1, 1)), &>=/2)
   end
 
+  def sort_ranks(ranks) when is_list(ranks) do
+    Enum.sort(ranks, &>=/2)
+  end
+
   def compare_ranks([rank0 | ranks0], [rank1 | ranks1]) do
     case compare_rank(rank0, rank1) do
       diff when diff in [:gt, :lt] ->
