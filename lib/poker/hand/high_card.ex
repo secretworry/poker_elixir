@@ -7,6 +7,8 @@ defmodule Poker.Hand.HighCard do
 
   defstruct ranks: []
 
+  def new(ranks) when is_list(ranks), do: %__MODULE__{ranks: ranks}
+
   def compare(%__MODULE__{ranks: ranks0}, %__MODULE__{ranks: ranks1}) do
     Card.compare_ranks(ranks0, ranks1)
   end

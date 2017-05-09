@@ -5,5 +5,7 @@ defmodule Poker.Hand.RoyalFlush do
 
   defstruct []
 
+  def new(), do: %__MODULE__{}
+
   def compare(%__MODULE__{}, %__MODULE__{}), do: :eq
 end

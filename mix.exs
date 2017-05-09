@@ -5,6 +5,7 @@ defmodule PokerElixir.Mixfile do
     [app: :poker_elixir,
      version: "0.1.0",
      elixir: "~> 1.3",
+     elixirc_paths: elixirc_paths(Mix.env),
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      deps: deps()]
@@ -16,6 +17,11 @@ defmodule PokerElixir.Mixfile do
   def application do
     [applications: [:logger]]
   end
+
+  # Specifies which paths to compile per environment.
+  defp elixirc_paths,     do: ["lib"]
+  defp elixirc_paths(:test), do: elixirc_paths ++ ["test/support"]
+  defp elixirc_paths(_),     do: elixirc_paths
 
   # Dependencies can be Hex packages:
   #
